@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -14,8 +15,8 @@ const VideoPlayer = ({ playerLinks, version }: VideoPlayerProps) => {
 
   if (playerLinks.length === 0) {
     return (
-      <Card className="p-6 bg-netflix-light border-netflix-gray animate-fade-in">
-        <p className="text-center text-netflix-text-secondary">
+      <Card className="p-6 bg-gray-800 border-gray-700">
+        <p className="text-center text-gray-400">
           Aucun lecteur disponible pour ce contenu.
         </p>
       </Card>
@@ -23,10 +24,10 @@ const VideoPlayer = ({ playerLinks, version }: VideoPlayerProps) => {
   }
 
   return (
-    <div className="space-y-4 animate-fade-in">
+    <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h3 className="text-xl font-semibold text-netflix-text-primary">Lecteurs disponibles</h3>
-        <span className="px-3 py-1 bg-netflix-red text-netflix-text-primary text-sm rounded-full">
+        <h3 className="text-xl font-semibold text-white">Lecteurs disponibles</h3>
+        <span className="px-3 py-1 bg-red-600 text-white text-sm rounded-full">
           {version}
         </span>
       </div>
@@ -39,15 +40,15 @@ const VideoPlayer = ({ playerLinks, version }: VideoPlayerProps) => {
             variant={selectedPlayer === player ? "default" : "outline"}
             className={`h-auto p-4 flex flex-col items-center space-y-2 ${
               selectedPlayer === player 
-                ? "bg-netflix-red hover:bg-netflix-red/90 border-netflix-red" 
-                : "border-netflix-gray text-netflix-text-secondary hover:text-netflix-text-primary hover:border-netflix-text-secondary"
+                ? "bg-red-600 hover:bg-red-700 border-red-600" 
+                : "border-gray-600 text-gray-300 hover:text-white hover:border-gray-500"
             }`}
             onClick={() => setSelectedPlayer(player)}
           >
             <Play className="w-5 h-5" />
             <span className="text-sm font-medium capitalize">{player.player}</span>
             {player.is_hd && (
-              <span className="text-xs bg-success px-2 py-1 rounded">HD</span>
+              <span className="text-xs bg-green-600 px-2 py-1 rounded">HD</span>
             )}
           </Button>
         ))}
@@ -55,7 +56,7 @@ const VideoPlayer = ({ playerLinks, version }: VideoPlayerProps) => {
 
       {/* Lecteur intégré */}
       {selectedPlayer && (
-        <Card className="bg-netflix-light border-netflix-gray overflow-hidden">
+        <Card className="bg-gray-800 border-gray-700 overflow-hidden">
           <div className="aspect-video">
             <iframe
               src={selectedPlayer.link}
@@ -66,14 +67,14 @@ const VideoPlayer = ({ playerLinks, version }: VideoPlayerProps) => {
             />
           </div>
           <div className="p-4 flex items-center justify-between">
-            <span className="text-netflix-text-secondary">
-              Lecteur: <span className="text-netflix-text-primary font-medium capitalize">{selectedPlayer.player}</span>
+            <span className="text-gray-300">
+              Lecteur: <span className="text-white font-medium capitalize">{selectedPlayer.player}</span>
             </span>
             <Button
               variant="ghost"
               size="sm"
               onClick={() => window.open(selectedPlayer.link, '_blank')}
-              className="text-netflix-text-secondary hover:text-netflix-text-primary"
+              className="text-gray-300 hover:text-white"
             >
               <ExternalLink className="w-4 h-4 mr-2" />
               Ouvrir dans un nouvel onglet

@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import Navigation from '@/components/Navigation';
@@ -48,16 +49,16 @@ const Home = () => {
   const heroContent = [...trendingMovies.slice(0, 3), ...trendingShows.slice(0, 2)];
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black">
       <Navigation onSearch={handleSearch} />
       
       {searchResults ? (
         <div className="container mx-auto px-4 py-8">
           <div className="flex items-center justify-between mb-6">
-            <h1 className="text-3xl font-bold text-netflix-text-primary bg-black/80 px-4 py-2 rounded-lg">Résultats de recherche</h1>
+            <h1 className="text-3xl font-bold text-white">Résultats de recherche</h1>
             <button
               onClick={clearSearch}
-              className="text-netflix-red hover:text-netflix-red/80 transition-colors"
+              className="text-red-500 hover:text-red-400 transition-colors"
             >
               Effacer
             </button>
@@ -83,7 +84,7 @@ const Home = () => {
           
           {searchResults.movies.length === 0 && searchResults.shows.length === 0 && (
             <div className="text-center py-12">
-              <p className="text-netflix-text-secondary text-lg bg-black/80 px-4 py-2 rounded-lg inline-block">Aucun résultat trouvé.</p>
+              <p className="text-gray-400 text-lg">Aucun résultat trouvé.</p>
             </div>
           )}
         </div>
@@ -91,7 +92,7 @@ const Home = () => {
         <>
           <HeroSection media={heroContent} />
           
-          <div className="container mx-auto px-4 py-8 space-y-12 bg-black">
+          <div className="container mx-auto px-4 py-8 space-y-12">
             <MediaGrid
               title="Films tendance"
               media={trendingMovies}

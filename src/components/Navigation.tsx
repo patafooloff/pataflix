@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Search, Menu, X, Film, Tv, Home } from 'lucide-react';
@@ -28,16 +29,16 @@ const Navigation = ({ onSearch }: NavigationProps) => {
   ];
 
   return (
-    <nav className="bg-netflix-dark backdrop-blur-md border-b border-netflix-light sticky top-0 z-50 animate-fade-in">
+    <nav className="bg-black/90 backdrop-blur-md border-b border-red-900/20 sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-netflix-red rounded-lg flex items-center justify-center">
-              <Film className="w-5 h-5 text-netflix-text-primary" />
+            <div className="w-8 h-8 bg-gradient-to-r from-red-600 to-red-800 rounded-lg flex items-center justify-center">
+              <Film className="w-5 h-5 text-white" />
             </div>
-            <span className="text-xl font-bold text-netflix-text-primary">
-              Pataflix
+            <span className="text-xl font-bold bg-gradient-to-r from-red-500 to-red-700 bg-clip-text text-transparent">
+              StreamFlix
             </span>
           </Link>
 
@@ -52,8 +53,8 @@ const Navigation = ({ onSearch }: NavigationProps) => {
                   to={item.href}
                   className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-200 ${
                     isActive 
-                      ? 'bg-netflix-red text-white' 
-                      : 'text-white hover:text-white hover:bg-netflix-light'
+                      ? 'bg-red-600 text-white' 
+                      : 'text-gray-300 hover:text-white hover:bg-red-600/20'
                   }`}
                 >
                   <Icon className="w-4 h-4" />
@@ -70,9 +71,9 @@ const Navigation = ({ onSearch }: NavigationProps) => {
               placeholder="Rechercher..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-64 bg-netflix-light border-netflix-gray text-netflix-text-primary placeholder-netflix-text-secondary"
+              className="w-64 bg-gray-800/50 border-gray-700 text-white placeholder-gray-400"
             />
-            <Button type="submit" variant="ghost" size="icon" className="text-netflix-text-secondary hover:text-netflix-text-primary">
+            <Button type="submit" variant="ghost" size="icon" className="text-gray-300 hover:text-white">
               <Search className="w-4 h-4" />
             </Button>
           </form>
@@ -81,7 +82,7 @@ const Navigation = ({ onSearch }: NavigationProps) => {
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden text-netflix-text-primary"
+            className="md:hidden text-white"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -90,7 +91,7 @@ const Navigation = ({ onSearch }: NavigationProps) => {
 
         {/* Menu Mobile */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-netflix-light animate-slide-in">
+          <div className="md:hidden py-4 border-t border-gray-700">
             <div className="flex flex-col space-y-2">
               {navItems.map((item) => {
                 const Icon = item.icon;
@@ -101,8 +102,8 @@ const Navigation = ({ onSearch }: NavigationProps) => {
                     to={item.href}
                     className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-200 ${
                       isActive 
-                        ? 'bg-netflix-red text-white' 
-                        : 'text-white hover:text-white hover:bg-netflix-light'
+                        ? 'bg-red-600 text-white' 
+                        : 'text-gray-300 hover:text-white hover:bg-red-600/20'
                     }`}
                     onClick={() => setIsMenuOpen(false)}
                   >
@@ -117,9 +118,9 @@ const Navigation = ({ onSearch }: NavigationProps) => {
                   placeholder="Rechercher..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="bg-netflix-light border-netflix-gray text-netflix-text-primary placeholder-netflix-text-secondary"
+                  className="bg-gray-800/50 border-gray-700 text-white placeholder-gray-400"
                 />
-                <Button type="submit" variant="ghost" size="icon" className="text-netflix-text-secondary hover:text-netflix-text-primary">
+                <Button type="submit" variant="ghost" size="icon" className="text-gray-300 hover:text-white">
                   <Search className="w-4 h-4" />
                 </Button>
               </form>
