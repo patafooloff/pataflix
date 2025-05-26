@@ -1,30 +1,39 @@
-import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import AppRoutes from './routes/AppRoutes';
-import { ThemeProvider } from './context/ThemeContext';
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Movies from "./pages/Movies";
+import TVShows from "./pages/TVShows";
+import Search from "./pages/Search";
+import MovieDetails from "./pages/MovieDetails";
+import TVShowDetails from "./pages/TVShowDetails";
+import NotFound from "./pages/NotFound";
 
-// Create a client
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      retry: 1,
-      staleTime: 5 * 60 * 1000, // 5 minutes
-    },
-  },
-});
+const queryClient = new QueryClient();
 
-function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider>
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <div className="min-h-screen bg-black">
+        <Toaster />
+        <Sonner />
         <BrowserRouter>
-          <AppRoutes />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/movies" element={<Movies />} />
+            <Route path="/series" element={<TVShows />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/movie/:id" element={<MovieDetails />} />
+            <Route path="/tv/:id" element={<TVShowDetails />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
         </BrowserRouter>
-      </ThemeProvider>
-    </QueryClientProvider>
-  );
-}
+      </div>
+    </TooltipProvider>
+  </QueryClientProvider>
+);
 
 export default App;
